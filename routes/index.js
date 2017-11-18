@@ -18,7 +18,11 @@ router.post('/signup', passport.authenticate('signup', {
 
 router.post('/signin', (req, res)=>{
   // find the sent username in the database
-  User.findOne({username: req.headers.username}, (err, user)=>{
+  console.log(req.body.username)
+  User.findOne({username: req.body.username}, (err, user)=>{
+    let responseMessage = {
+      message: ''
+    }
     // error handle
     if (err){
       return done(err);
@@ -26,7 +30,7 @@ router.post('/signin', (req, res)=>{
     // if the username exists in the database, then you compare password
     if (user) {
       // check if the password is correct
-      if (user.validPassword(req.headers.password)){
+      if (user.validPassword(req.body.password)){
         // return token here
         var payload = {
           username: user.username,
@@ -34,18 +38,20 @@ router.post('/signin', (req, res)=>{
         };
         // set token expired after 3h
         var token = jwt.sign(payload, 'secret', { expiresIn: '3h' });
-        res.send(token);
+        res.json(token);
       }
       // when usenrmae found but password not match
       else {
         req.res.status(400);
-        req.res.send('Password is not correct');
+        responseMessage.message = 'Password is not correct';
+        req.res.send(responseMessage);
       }
     }
     // when username not found
     else {
       req.res.status(400);
-      req.res.send('Username is not correct');
+      responseMessage.message = 'Username is not correct';
+      req.res.send(responseMessage);
     }
   })
 });

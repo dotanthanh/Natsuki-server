@@ -27,10 +27,11 @@ const userSchema = new mongoose.Schema({
   ]
 })
 
-userSchema.methods.generateHash = (password) =>{
+userSchema.methods.generateHash = (password) => {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
 }
 
+// use function(anonymous function) instead of arrow function to access keyword this
 userSchema.methods.validPassword = function(password){
   return bcrypt.compareSync(password, this.password)
 }

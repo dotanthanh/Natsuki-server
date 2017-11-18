@@ -1,3 +1,4 @@
+const cors = require('cors');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -12,6 +13,8 @@ var events = require('./routes/event');
 const passportConfig = require('./auth/passport');
 
 var app = express();
+
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
