@@ -25,7 +25,7 @@ const eventSchema = new mongoose.Schema({
 
 // update the status of the event based on the relationship between
 // start_time, end_time and the present
-eventSchema.methods.updateStatus = () =>{
+eventSchema.methods.updateStatus = function(){
   // when end_time < presence
   if (new Date(this.end_time).getTime() <= Date.now()) {
     this.status = 'closed';
