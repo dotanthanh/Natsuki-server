@@ -5,9 +5,10 @@ const bcrypt = require('bcrypt-nodejs');
 const eventSchema = new mongoose.Schema({
   name: String,
   description: String,
+  host: String,
   participants: [
     {
-      user_id: String
+      user: String
     }
   ],
   start_time: Date,

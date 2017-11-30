@@ -21,7 +21,8 @@ router.get('/:name', (req, res)=>{
     }
     // return the result (an array). The array can be empty (as none was found)
     else {
-      res.json(update(result));
+      // res.json(update(result));
+      res.json(result);
     }
   })
 })
@@ -30,13 +31,14 @@ router.get('/:name', (req, res)=>{
 router.post('/new', passport.authenticate('signin'), (req, res)=>{
   //get the user_id from the token (through passport jwt authentication)
   //and add to the list of the participants (the host of the event)
-  const host_id = req.user._id;
+  const host_username = req.user.username;
   // the post request must use form-urlencoded type
   const event = {
     name: req.body.name,
     description: req.body.description,
+    host: host_username,
     participants: [{
-      user_id: host_id
+      user: host_username
     }],
     start_time: req.body.start_time,
     end_time: req.body.end_time,
@@ -46,6 +48,16 @@ router.post('/new', passport.authenticate('signin'), (req, res)=>{
     status: 'upcoming'
   };
   const newEvent = new Event(event);
+
+  User.update( { username: host_username },
+    {
+      $push: {
+        'hosted_events': { event_id: newEvent._id },
+        'joined_events': { event_id: newEvent._id }
+      }
+    }
+  ) ;
+
   // save the Event object into the database
   newEvent.save((err)=>{
     if (err) {
