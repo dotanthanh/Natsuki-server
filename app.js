@@ -49,7 +49,7 @@ app.use(function(req, res, next) {
 
 
 // explicit handle favicon error here
-app.use(express.favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 
 module.exports = app;
