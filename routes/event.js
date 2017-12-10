@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
 
 
 // handle event searching with name
-router.get('/:name', (req, res) => {
+router.get('/byname/:name', (req, res) => {
   // sanitize the query
   const name = req.params.name.replace('+', ' ');
   // find the event with related name
