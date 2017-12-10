@@ -29,7 +29,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // connect to the database
-mongoose.connect('mongodb://admin:admin@ds145275.mlab.com:45275/ticketapp');
+mongoose.connect(process.env.MONGODB_CONFIG);
+
 
 // inject the passport configuration
 app.use(passport.initialize());
