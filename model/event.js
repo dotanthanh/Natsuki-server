@@ -8,6 +8,7 @@ const eventSchema = new mongoose.Schema({
   host: String,
   participants: [
     {
+      id: String,
       user: String
     }
   ],
@@ -15,27 +16,7 @@ const eventSchema = new mongoose.Schema({
   end_time: Date,
   category: String,
   hashtag: [String],
-  // the status of the event should be closed or opening or upcoming (yet to happen)
-  status: {
-    type: String,
-    required: ()=>{
-      return 'closed' || 'opening' || 'upcoming';
-    }
-  }
 })
-
-// update the status of the event based on the relationship between
-// start_time, end_time and the present
-eventSchema.methods.updateStatus = function(){
-  // when end_time < presence
-  if (new Date(this.end_time).getTime() <= Date.now()) {
-    this.status = 'closed';
-  }
-  // when start_time < presence
-  else if (new Date(this.start_time) <= Date.now()) {
-    this.status = 'opening';
-  }
-}
 
 // export the event model
 module.exports = mongoose.model('Event', eventSchema);

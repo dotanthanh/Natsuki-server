@@ -23,7 +23,7 @@ const signupStrategy = new customStrategy((req, done)=>{
     [ {username: req.body.username}, {email: req.body.email} ]
     }, (err, user)=>{
       // prepare response body, this object will get updated depend on whether
-      // the info is valid or ngOnInitlet responseBody = {
+      // the info is valid or not
       let responseBody = {
         message: ''
       }
@@ -87,6 +87,7 @@ module.exports = (passport)=>{
 
   //apply signin strategy (which we defined above)
   passport.use('signin', signinStrategy, (req, res, done)=>{
+    console.log(req);
     done();
   });
 }
