@@ -5,9 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "start-dev": "nodemon ./bin/www",
-    "test": "./node_modules/.bin/mocha",
-    "preinstall": "cd client-side && npm i",
-    "postinstall": "cd client-side && ng build --aot -prod"
+    "test": "./node_modules/.bin/mocha"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
