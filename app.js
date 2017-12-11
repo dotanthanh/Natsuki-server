@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // connect to the database
-mongoose.connect(process.env.MONGODB_CONFIG);
+mongoose.connect('mongodb://admin:admin@ds145275.mlab.com:45275/ticketapp');
 
 
 // inject the passport configuration
@@ -45,6 +45,11 @@ app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
+});
+
+// serve the static file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 
