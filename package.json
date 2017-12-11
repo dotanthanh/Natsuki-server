@@ -7,7 +7,7 @@
     "start-dev": "nodemon ./bin/www",
     "test": "./node_modules/.bin/mocha",
     "preinstall": "cd client-side && npm i",
-    "postinstall": "ng build --aot -prod"
+    "postinstall": "cd client-side && ng build --aot -prod"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
