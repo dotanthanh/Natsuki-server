@@ -4,8 +4,7 @@
 /dist
 /tmp
 /out-tsc
-/public
-/client-side
+
 
 # dependencies
 /node_modules
