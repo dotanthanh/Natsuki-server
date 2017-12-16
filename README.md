@@ -12,7 +12,7 @@ The application is deployed and live at : https://natsuki.herokuapp.com/
 3. Run `npm run start-dev` to start the development build scripts
 4. Run `npm run test` to run test cases and see the results
 5. Run `npm run start` to start the server.
-6. The application is now live at : http://localhost:3000
+6. The server is now running at : http://localhost:3000
 
 
 ## Techs used
